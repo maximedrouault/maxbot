@@ -1,0 +1,12 @@
+spring:
+  ai:
+    openai:
+      api-key: ${GROQ_API_KEY}
+      base-url: https://api.groq.com/openai
+      chat:
+        options:
+          model: openai/gpt-oss-20b
+          temperature: 0.2
+
+  application:
+    name: maxbot-back
