@@ -15,7 +15,7 @@ public class ChatController {
         this.chatClient = chatClientBuilder.build();
     }
 
-    @Value("${PROMPT_TEMPLATE}")
+    @Value("${SYSTEM_TEMPLATE}")
     private String SYSTEM_TEMPLATE;
 
 
