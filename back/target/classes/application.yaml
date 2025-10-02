@@ -1,12 +1,19 @@
 spring:
   ai:
-    openai:
-      api-key: ${GROQ_API_KEY}
-      base-url: https://api.groq.com/openai
+    ollama:
+      base-url: ${OLLAMA_BASE_URL}
       chat:
         options:
-          model: openai/gpt-oss-20b
-          temperature: 0.2
+          model: ${OLLAMA_MODEL}
+          temperature: ${OLLAMA_TEMPERATURE}
+
+#    openai:
+#      api-key: ${GROQ_API_KEY}
+#      base-url: ${GROQ_BASE_URL}
+#      chat:
+#        options:
+#          model: ${GROQ_MODEL}
+#          temperature: ${GROQ_TEMPERATURE}
 
   application:
     name: maxbot-back
