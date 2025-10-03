@@ -16,14 +16,14 @@ public class ChatController {
     }
 
     @Value("${SYSTEM_TEMPLATE}")
-    private String SYSTEM_TEMPLATE;
+    private String systemTemplate;
 
 
     @GetMapping("/chat")
-    public Object chat(@RequestBody String userInput) {
+    public String chat(@RequestBody String userInput) {
 
         return this.chatClient.prompt()
-                .system(SYSTEM_TEMPLATE)
+                .system(systemTemplate)
                 .user(userInput)
                 .call()
                 .content();
