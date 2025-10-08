@@ -17,3 +17,12 @@ spring:
 #        options:
 #          model: ${GROQ_MODEL}
 #          temperature: ${GROQ_TEMPERATURE}
+
+logging:
+  level:
+    org:
+      springframework:
+        ai:
+          chat:
+            client:
+              advisor: DEBUG
