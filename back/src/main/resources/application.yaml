@@ -3,20 +3,14 @@ spring:
     name: maxbot-back
 
   ai:
-    ollama:
-      base-url: ${OLLAMA_BASE_URL}
+    openai:
+      api-key: ${OPENAI_API_KEY}
       chat:
         options:
-          model: ${OLLAMA_MODEL}
-          temperature: ${OLLAMA_TEMPERATURE}
+          model: ${OPENAI_MODEL}
+          temperature: ${OPENAI_TEMPERATURE}
 
-#    openai:
-#      api-key: ${GROQ_API_KEY}
-#      base-url: ${GROQ_BASE_URL}
-#      chat:
-#        options:
-#          model: ${GROQ_MODEL}
-#          temperature: ${GROQ_TEMPERATURE}
+
 
 logging:
   level:

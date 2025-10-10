@@ -5,9 +5,11 @@ import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 
 @RestController
 public class ChatController {
@@ -25,13 +27,13 @@ public class ChatController {
     private String systemTemplate;
 
 
-    @GetMapping("/chat")
-    public String chat(@RequestParam String userInput) {
+    @GetMapping(value = "/chat", produces = MediaType.TEXT_PLAIN_VALUE)
+    public Flux<String> chat(@RequestParam String userInput) {
 
         return this.chatClient.prompt()
                 .system(systemTemplate)
                 .user(userInput)
-                .call()
+                .stream()
                 .content();
     }
 }
