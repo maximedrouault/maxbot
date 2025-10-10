@@ -16,13 +16,15 @@ spring:
         index-name: ${PINECONE_INDEX_NAME}
         project-id: ${PINECONE_PROJECT_ID}
 
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 25MB
 
 
 logging:
   level:
     org:
       springframework:
-        ai:
-          chat:
-            client:
-              advisor: DEBUG
+        ai: DEBUG
+        web: INFO
