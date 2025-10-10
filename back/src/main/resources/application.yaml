@@ -10,6 +10,12 @@ spring:
           model: ${OPENAI_MODEL}
           temperature: ${OPENAI_TEMPERATURE}
 
+    vectorstore:
+      pinecone:
+        api-key: ${PINECONE_API_KEY}
+        index-name: ${PINECONE_INDEX_NAME}
+        project-id: ${PINECONE_PROJECT_ID}
+
 
 
 logging:
