@@ -33,7 +33,7 @@ public class ChatService {
 
     public Flux<String> chatRequest(String userInput) {
         return this.chatClient.prompt()
-                .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, conversationId))
+                .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, conversationId))
                 .system(promptSystemTemplate)
                 .user(userInput)
                 .stream()
