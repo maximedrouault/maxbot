@@ -1,42 +1,34 @@
 package org.maxbot.back.service;
 
+import org.maxbot.back.dto.response.ChatResponse;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
-import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.context.annotation.SessionScope;
-import reactor.core.publisher.Flux;
-
-import java.util.UUID;
 
 @Service
-@SessionScope
 public class ChatService {
 
-    @Value("${PROMPT_SYSTEM_TEMPLATE}")
-    private String promptSystemTemplate;
+    @Value("${ai.system-prompt}")
+    private String aiSystemPrompt;
 
     private final ChatClient chatClient;
-    private final UUID conversationId;
 
-    public ChatService(ChatClient.Builder chatClientBuilder, ChatMemory chatMemory, VectorStore vectorStore) {
+    public ChatService(ChatClient.Builder chatClientBuilder, VectorStore vectorStore) {
         this.chatClient = chatClientBuilder
-                .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
+                .defaultAdvisors(SimpleLoggerAdvisor.builder().build())
                 .defaultAdvisors(QuestionAnswerAdvisor.builder(vectorStore).build())
                 .build();
-        this.conversationId = UUID.randomUUID();
     }
 
 
-    public Flux<String> chatRequest(String userInput) {
-        return this.chatClient.prompt()
-                .advisors(advisorSpec -> advisorSpec.param(ChatMemory.CONVERSATION_ID, conversationId))
-                .system(promptSystemTemplate)
+    public ChatResponse chatRequest(String userInput) {
+        return chatClient.prompt()
+                .system(aiSystemPrompt)
                 .user(userInput)
-                .stream()
-                .content();
+                .call()
+                .entity(ChatResponse.class);
     }
 }
