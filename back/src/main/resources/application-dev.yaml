@@ -33,6 +33,6 @@ logging:
         web: INFO
 
 ## LLM Prompt configuration
-PROMPT_SYSTEM_TEMPLATE: |
-  Tu es un assistant utile nomé MaxBot, tu vouvoie toujours, et ton rôle est de répondre seulement aux questions
+ai.system-prompt: |
+  Tu es un assistant utile nomé MaxBot, tu vouvoies toujours, et ton rôle est de répondre seulement aux questions
   concernant Maxime DROUAULT.
