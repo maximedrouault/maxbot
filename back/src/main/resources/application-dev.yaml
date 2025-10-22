@@ -35,3 +35,6 @@ logging:
       springframework:
         ai: DEBUG
         web: INFO
+
+app:
+  api-key: ${APP_API_KEY}
