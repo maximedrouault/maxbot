@@ -17,7 +17,7 @@ public class ChatController {
     private final ChatService chatService;
 
 
-    @PostMapping(value = "/chat")
+    @PostMapping("/chat")
     public ResponseEntity<ChatResponse> chatRequest(@RequestBody String userInput) {
         ChatResponse answer = chatService.chatRequest(userInput);
 
