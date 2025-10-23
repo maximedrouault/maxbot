@@ -1,10 +1,12 @@
 package org.maxbot.back.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.reader.pdf.PagePdfDocumentReader;
 import org.springframework.ai.transformer.splitter.TextSplitter;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
+import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class EmbeddingService {
 
     private final VectorStore vectorStore;
@@ -28,11 +31,30 @@ public class EmbeddingService {
         }
     }
 
-    public void deleteDocument(List<String> idList) {
+    public void deleteDocumentByIds(List<String> idList) {
         try {
             vectorStore.delete(idList);
         } catch (Exception e) {
-            throw new RuntimeException("Failed to delete documents from Vector store", e);
+            log.warn("Failed to delete documents by IDs from Vector store", e);
+        }
+    }
+
+    public void deleteDocumentByFileName(String fileName) {
+        try {
+            SearchRequest searchRequest = SearchRequest.builder()
+                    .query("document")
+                    .filterExpression("file_name == '" + fileName + "'")
+                    .build();
+
+            List<Document> matchingDocs = vectorStore.similaritySearch(searchRequest);
+
+            List<String> idsToDelete = matchingDocs.stream()
+                    .map(Document::getId)
+                    .toList();
+
+            vectorStore.delete(idsToDelete);
+        } catch (Exception e) {
+            log.warn("Failed to delete documents by file name from Vector store", e);
         }
     }
 

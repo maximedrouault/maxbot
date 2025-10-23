@@ -26,7 +26,14 @@ public class EmbeddingController {
 
     @DeleteMapping("/deleteByIds")
     public ResponseEntity<Void> deleteByIds(@RequestBody List<String> idList) {
-        embeddingService.deleteDocument(idList);
+        embeddingService.deleteDocumentByIds(idList);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/deleteByFileName")
+    public ResponseEntity<Void> deleteByFileName(@RequestParam String fileName) {
+        embeddingService.deleteDocumentByFileName(fileName);
 
         return ResponseEntity.noContent().build();
     }
