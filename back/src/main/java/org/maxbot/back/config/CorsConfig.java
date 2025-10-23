@@ -21,7 +21,7 @@ public class CorsConfig {
                 "https://www.maximedrouault.com",
                 "https://maximedrouault.vercel.app"
                 ));
-        configuration.setAllowedMethods(List.of("POST", "OPTIONS"));
+        configuration.setAllowedMethods(List.of("POST", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Content-Type", "X-API-KEY"));
         configuration.setAllowCredentials(false);
         configuration.setMaxAge(Duration.ofHours(1));

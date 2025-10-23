@@ -18,7 +18,7 @@ public class EmbeddingController {
 
 
     @PostMapping("/uploadPdf")
-    public ResponseEntity<String> pdfToVectorStore(@RequestParam MultipartFile file) {
+    public ResponseEntity<Void> pdfToVectorStore(@RequestParam MultipartFile file) {
         embeddingService.pdfToVectorStore(file);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
