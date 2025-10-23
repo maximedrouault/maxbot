@@ -1,13 +1,13 @@
 package org.maxbot.back.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.maxbot.back.dto.response.ChatResponse;
 import org.maxbot.back.service.ChatService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Flux;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,8 +18,8 @@ public class ChatController {
 
 
     @PostMapping("/chat")
-    public ResponseEntity<ChatResponse> chatRequest(@RequestBody String userInput) {
-        ChatResponse answer = chatService.chatRequest(userInput);
+    public ResponseEntity<Flux<String>> chatRequest(@RequestBody String userInput) {
+        Flux<String> answer = chatService.chatRequest(userInput);
 
         return ResponseEntity.ok().body(answer);
     }
