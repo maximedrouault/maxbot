@@ -1,5 +1,6 @@
 package org.maxbot.back.service;
 
+import org.maxbot.back.dto.request.ChatRequest;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
 import org.springframework.ai.vectorstore.VectorStore;
@@ -17,15 +18,14 @@ public class ChatService {
 
     public ChatService(ChatClient.Builder chatClientBuilder, VectorStore vectorStore) {
         this.chatClient = chatClientBuilder
-//                .defaultAdvisors(SimpleLoggerAdvisor.builder().build())
                 .defaultAdvisors(QuestionAnswerAdvisor.builder(vectorStore).build())
                 .build();
     }
 
-    public Flux<String> chatRequest(String userInput) {
+    public Flux<String> chatRequest(ChatRequest request) {
         return chatClient.prompt()
                 .system(aiSystemPrompt)
-                .user(userInput)
+                .user(request.toString())
                 .stream()
                 .content();
     }
