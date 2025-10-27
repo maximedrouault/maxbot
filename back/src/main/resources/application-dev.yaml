@@ -8,7 +8,7 @@ spring:
       api-key: ${OPENAI_API_KEY}
       chat:
         options:
-          model: gpt-4o-mini
+          model: gpt-5-chat-latest
           temperature: 0
 
     ## Pinecone vector store configuration
