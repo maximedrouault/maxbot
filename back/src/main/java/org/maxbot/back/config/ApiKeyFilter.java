@@ -16,8 +16,11 @@ import java.io.IOException;
 @Slf4j
 public class ApiKeyFilter extends OncePerRequestFilter {
 
-    @Value("${app.api-key}")
-    private String expectedApiKey;
+    @Value("${app.chat-key}")
+    private String chatApiKey;
+
+    @Value("${app.embedding-key}")
+    private String embeddingApiKey;
 
     @Override
     protected boolean shouldNotFilter(@NonNull HttpServletRequest request) {
@@ -29,9 +32,13 @@ public class ApiKeyFilter extends OncePerRequestFilter {
                                     @NonNull HttpServletResponse response,
                                     @NonNull FilterChain filterChain) throws IOException, ServletException {
         String providedApiKey = request.getHeader("X-API-KEY");
+        String requestPath = request.getRequestURI();
+
+        // Determine which API key to validate based on the request path
+        String expectedApiKey = requestPath.startsWith("/api/embedding") ? embeddingApiKey : chatApiKey;
 
         if (providedApiKey == null || !providedApiKey.equals(expectedApiKey)) {
-            logger.warn("Request blocked due to missing or invalid API key.");
+            log.warn("Request blocked due to missing or invalid API key. Path: {}", requestPath);
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 
             return;

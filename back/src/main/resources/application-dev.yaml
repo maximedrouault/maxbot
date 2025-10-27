@@ -37,4 +37,5 @@ logging:
         web: INFO
 
 app:
-  api-key: ${APP_API_KEY}
+  chat-key: ${APP_CHAT_KEY}
+  embedding-key: ${APP_EMBEDDING_KEY}
