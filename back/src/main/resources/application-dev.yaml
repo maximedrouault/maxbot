@@ -20,7 +20,7 @@ spring:
 
   ## AI system prompt configuration
   config:
-    import: optional:classpath:ai-system-prompt.yaml
+    import: classpath:ai-system-prompt.yaml
 
   ## File upload configuration
   servlet:
@@ -36,6 +36,7 @@ logging:
         ai: DEBUG
         web: INFO
 
+# ApiKeyFilter configuration
 app:
   chat-key: ${APP_CHAT_KEY}
   embedding-key: ${APP_EMBEDDING_KEY}
