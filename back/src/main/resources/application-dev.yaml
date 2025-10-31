@@ -49,15 +49,3 @@ resilience4j:
         limit-for-period: 450
         limit-refresh-period: 60s
         timeout-duration: 0ms
-
-  bulkhead:
-    instances:
-        globalBulkhead:
-            max-concurrent-calls: 100
-            max-wait-duration: 0ms
-
-  timelimiter:
-    instances:
-        globalTimeLimiter:
-            timeout-duration: 60s
-            cancel-running-future: true
