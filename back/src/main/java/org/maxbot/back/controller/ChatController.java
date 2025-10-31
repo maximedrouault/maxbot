@@ -1,5 +1,6 @@
 package org.maxbot.back.controller;
 
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.maxbot.back.dto.request.ChatRequest;
@@ -16,6 +17,7 @@ import reactor.core.publisher.Flux;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api")
+@RateLimiter(name = "globalRateLimiter")
 public class ChatController {
 
     private final ChatService chatService;
