@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.maxbot</groupId>
-    <artifactId>back</artifactId>
+    <artifactId>maxbot-back</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>back</name>
-    <description>back</description>
+    <name>maxbot-back</name>
+    <description>maxbot-back</description>
     <url/>
     <licenses>
         <license/>
@@ -65,7 +65,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <scope>annotationProcessor</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
