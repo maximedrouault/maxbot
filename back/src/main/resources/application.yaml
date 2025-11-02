@@ -1,0 +1,46 @@
+spring:
+  profiles:
+    default: dev
+
+  application:
+    name: maxbot-back
+
+  ## OpenAI LLM configuration
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: gpt-5-chat-latest
+          temperature: 0
+
+    ## Pinecone vector store configuration
+    vectorstore:
+      pinecone:
+        api-key: ${PINECONE_API_KEY}
+        index-name: maxbot-vector
+        project-id: 479f03d6-0255-4c9e-a91a-3d71166a0818
+
+  ## AI system prompt configuration
+  config:
+    import: classpath:ai-system-prompt.yaml
+
+  ## File upload configuration
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 25MB
+
+# ApiKeyFilter configuration
+app:
+  chat-key: ${APP_CHAT_KEY}
+  embedding-key: ${APP_EMBEDDING_KEY}
+
+# Rate-limiting configuration
+resilience4j:
+  ratelimiter:
+    instances:
+      globalRateLimiter:
+        limit-for-period: 450
+        limit-refresh-period: 60s
+        timeout-duration: 0ms
