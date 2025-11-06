@@ -1,8 +1,0 @@
-## Production-specific logging configuration
-logging:
-  level:
-    root: WARN
-    org:
-      springframework:
-        ai: INFO
-        web: WARN

@@ -1,8 +1,0 @@
-## Development-specific logging configuration
-logging:
-  level:
-    root: INFO
-    org:
-      springframework:
-        ai: DEBUG
-        web: INFO
