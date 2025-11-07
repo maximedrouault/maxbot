@@ -12,4 +12,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(RequestNotPermitted.class)
     @ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
     public void handleRateLimitException() {}
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public void handleException() {}
 }
