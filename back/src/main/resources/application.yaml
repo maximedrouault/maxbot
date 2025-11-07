@@ -9,15 +9,15 @@ spring:
   application:
     name: maxbot-back
 
-  ## SSL/TLS configuration
+  ## SSL/TLS configuration with Let's Encrypt and automatic reloading
   ssl:
     bundle:
-      jks:
+      pem:
         maxbot-back:
+          reload-on-update: true
           keystore:
-            location: "${KEYSTORE_LOCATION}"
-            password: "${KEYSTORE_PASSWORD}"
-            type: "PKCS12"
+            certificate: "${LETSENCRYPT_CERT_PATH}"
+            private-key: "${LETSENCRYPT_KEY_PATH}"
 
   ## File upload configuration
   servlet:

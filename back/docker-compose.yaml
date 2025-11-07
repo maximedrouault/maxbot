@@ -1,9 +1,0 @@
-services:
-  backend:
-    image: maxbot-back:0.0.1-SNAPSHOT
-    container_name: maxbot-back
-    ports:
-      - "8080:8080"
-    env_file:
-      - .env
-    restart: unless-stopped
