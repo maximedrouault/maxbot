@@ -1,6 +1,29 @@
+## Server configuration
+server:
+  port: 8443
+  ssl:
+    bundle: maxbot-back
+
 spring:
+  ## Application name
   application:
     name: maxbot-back
+
+  ## SSL/TLS configuration
+  ssl:
+    bundle:
+      jks:
+        maxbot-back:
+          keystore:
+            location: "${KEYSTORE_LOCATION}"
+            password: "${KEYSTORE_PASSWORD}"
+            type: "PKCS12"
+
+  ## File upload configuration
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 25MB
 
   ## OpenAI LLM configuration
   ai:
@@ -18,18 +41,12 @@ spring:
         index-name: maxbot-vector
         project-id: 479f03d6-0255-4c9e-a91a-3d71166a0818
 
-  ## File upload configuration
-  servlet:
-    multipart:
-      max-file-size: 20MB
-      max-request-size: 25MB
-
-# ApiKeyFilter configuration
+## API Key filter configuration
 app:
   chat-key: ${APP_CHAT_KEY}
   embedding-key: ${APP_EMBEDDING_KEY}
 
-# Rate-limiting configuration
+## Rate-limiting configuration
 resilience4j:
   ratelimiter:
     instances:
