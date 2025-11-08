@@ -1,7 +1,3 @@
-## Server configuration
-server:
-  port: 8080
-
 spring:
   ## Application name
   application:

@@ -1,0 +1,3 @@
+## Server configuration for development
+server:
+  port: 8080

@@ -1,0 +1,16 @@
+## Server configuration for production with Let's Encrypt
+server:
+  port: 8443
+  ssl:
+    bundle: maxbot-back
+
+spring:
+  ## SSL/TLS configuration with Let's Encrypt and automatic reloading
+  ssl:
+    bundle:
+      pem:
+        maxbot-back:
+          reload-on-update: true
+          keystore:
+            certificate: "${LETSENCRYPT_CERT_PATH}"
+            private-key: "${LETSENCRYPT_KEY_PATH}"
