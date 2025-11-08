@@ -79,4 +79,3 @@ fabric.properties
 
 /back/.env
 /back/target/
-/back/certs/
