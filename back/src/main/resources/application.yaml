@@ -1,4 +1,8 @@
 spring:
+  ## Default profile fallback (if SPRING_PROFILES_ACTIVE not set)
+  profiles:
+    default: dev
+
   ## Application name
   application:
     name: maxbot-back
