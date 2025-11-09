@@ -77,5 +77,9 @@ fabric.properties
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
 
-/back/.env
+# Environment files (ignore .env files but keep examples)
+/back/.env*
+!/back/.env.example*
+/front/.env*
+!/front/.env.example*
 /back/target/
