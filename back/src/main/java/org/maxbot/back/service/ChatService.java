@@ -2,7 +2,9 @@ package org.maxbot.back.service;
 
 import org.maxbot.back.dto.request.ChatRequest;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
+import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -18,7 +20,12 @@ public class ChatService {
 
     public ChatService(ChatClient.Builder chatClientBuilder, VectorStore vectorStore) {
         this.chatClient = chatClientBuilder
-                .defaultAdvisors(QuestionAnswerAdvisor.builder(vectorStore).build())
+                .defaultAdvisors(SimpleLoggerAdvisor.builder().build())
+                .defaultAdvisors(QuestionAnswerAdvisor.builder(vectorStore)
+                        .searchRequest(SearchRequest.builder()
+                                .topK(10)
+                                .build())
+                        .build())
                 .build();
     }
 
