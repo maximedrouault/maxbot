@@ -1,3 +1,9 @@
 ## Server configuration for development
 server:
   port: 8080
+
+## Logging configuration for development
+logging:
+  level:
+    org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor: DEBUG
+    root: INFO
